@@ -89,7 +89,7 @@ public class SampleController {
 		list.add(vo);
 		
 		from="1995-06-28";
-		tranForm = new SimpleDateFormat("yyy-MM-dd");
+		tranForm = new SimpleDateFormat("yyyy-MM-dd");
 		to = tranForm.parse(from);
 		vo = new ProfessorVO();
 		vo.setPid(2);

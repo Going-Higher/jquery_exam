@@ -1,5 +1,6 @@
 package kr.kopo.domain;
 
+
 public class StudentVO {
 	private long sid;
 	private String sname;
@@ -29,8 +30,8 @@ public class StudentVO {
 	public String getBirth() {
 		return birth;
 	}
-	public void setBirth(String birth) {
-		this.birth = birth;
+	public void setBirth(String to) {
+		this.birth = to;
 	}
 	public String getSex() {
 		return sex;

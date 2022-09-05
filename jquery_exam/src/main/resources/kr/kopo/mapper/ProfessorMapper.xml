@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kopo.mapper.ProfessorMapper">
+
+	<select id="list" resultType="kr.kopo.domain.ProfessorVO">
+		<![CDATA[
+			select * from professor
+		]]>
+	</select>
+	
+	<insert id="insert">
+		<![CDATA[
+			insert into professor (pid,pname,dept,post,pay,hire,major,campus)
+			values(#{pid},#{pname},#{dept},#{post},#{pay},#{hire,jdbcType=DATE},#{major},#{campus})
+		]]>
+	</insert>
+	
+	<select id="read" resultType="kr.kopo.domain.ProfessorVO">
+		<![CDATA[
+			select * from professor where sid =
+			#{pid}
+		]]>
+	</select>
+	
+	<delete id="delete">
+		delete professor where pid = #{pid}
+	</delete>
+		
+	<update id="update">
+		update professor
+		set pid= #{pid},
+			pname= #{pname},
+			dept = #{dept},
+			post= #{post},
+			pay = #{pay},
+			hire = #{hire},
+			major = #{major},
+			campus = #{campus}
+		where pid = #{pid}
+	</update>
+	
+</mapper>

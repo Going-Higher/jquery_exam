@@ -13,43 +13,28 @@
 <script>
 $(function() {	
 	$.ajax({
-		url: "/controller/sample/getList/444.json",
+		url: "/controller/sample/getList1/444.json",
 		dataType: "JSON",
 		success: function(data) {
 			if(data.length > 0) {
 // 				var tb = $(".wrap").html();
 				var tb = $('<table class="table table-striped table-bordered table-hover"/>');
-				var head = $("<tr/>").append($("<td/>").text("교수번호"), $("<td/>").text("교수이름"), $("<td/>").text("학과"), $("<td/>").text("교수직위"), $("<td/>").text("연봉"), $("<td/>").text("임용일"), $("<td/>").text("전공"),$("<td/>").text("캠퍼스"));
+				var head = $("<tr/>").append($("<td/>").text("학생번호"), $("<td/>").text("성명"), $("<td/>").text("학과"), $("<td/>").text("생일"), $("<td/>").text("성별"), $("<td/>").text("교수번호"));
 				console.log(tb);
 				tb.append(head);
 // 				$(".wrap").empty();
 				var html = "";
-				for(var i in data) {
-					html += "<tr>";
-					html += "<td>" + data[i].pid + "</td>";
-					html += "<td>" + data[i].pname + "</td>";
-					html += "<td>" + data[i].dept + "</td>";
-					html += "<td>" + data[i].post + "</td>";
-					html += "<td>" + data[i].pay + "</td>";
-					var $hire = new Date(data[i].hire);
-					
-					html += "<td>" + $hire.getFullYear() + '-' + ($hire.getMonth() + 1) + '-' + $hire.getDate() + "</td>";
-					html += "<td>" + data[i].major + "</td>";
-					html += "<td>" + data[i].campus + "</td>";
-					html += "</tr>";
-					
-// 					var $pid = data[i].pid;
-// 					var $pname = data[i].pname;
-// 					var $dept = data[i].dept;
-// 					var $post = data[i].post;
-// 					var $pay = data[i].pay;
-// 					var $hire = new Date(data[i].hire).toLocaleDateString();
-// 					var $major = data[i].major;
-// 					var $campus = data[i].campus;
-// 					var row = $("<tr/>").append($("<td/>").text($pid), $("<td/>").text($pname), $("<td/>").text($dept), $("<td/>").text($post), $("<td/>").text($pay), $("<td/>").text($hire), $("<td/>").text($major),$("<td/>").text($campus));
-// 					tb.append(row);
+				for(var i in data) {						
+					var $sid = data[i].sid;
+					var $sname = data[i].sname;
+					var $dept = data[i].dept;
+					var $birth = new Date(data[i].birth).toLocaleDateString();
+					var $sex = data[i].sex;
+					var $pid = data[i].pid;
+					var row = $("<tr/>").append($("<td/>").text($sid), $("<td/>").text($sname), $("<td/>").text($dept), $("<td/>").text($birth), $("<td/>").text($sex), $("<td/>").text($pid));
+					tb.append(row);
 				}
-				tb.append(html);
+// 				tb.append(html);
 				console.log(tb);
 				$(".wrap").append(tb);
 			}
@@ -59,6 +44,7 @@ $(function() {
 </script>
 </head>
 <body>
+교수리스트
 <table class="table" id=body border=1>
 	<thead id="thead1">
 		<tr id="tr1">
@@ -91,7 +77,7 @@ $(function() {
 <div class="row">
 	<div class="col-lg-12">
 		<div class="paenl panel-default">
-			<div class="paenl-heading">교수리스트</div>
+			<div class="paenl-heading">학생리스트</div>
 			
 			<div class="panel-body wrap"></div>
 		</div>

@@ -17,8 +17,7 @@
 	
 	<select id="read" resultType="kr.kopo.domain.ProfessorVO">
 		<![CDATA[
-			select * from professor where sid =
-			#{pid}
+			select * from professor where sid = #{pid}
 		]]>
 	</select>
 	

@@ -5,27 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.kopo.domain.ProfessorVO;
-import kr.kopo.mapper.ProfessorMapper;
+import kr.kopo.domain.StudentVO;
+import kr.kopo.mapper.StudentMapper;
 
 @Service
-public class ProfessorServiceImpl implements ProfessorService {
+public class StudentServiceImpl implements StudentService {
 	
 	@Autowired
-	private ProfessorMapper mapper;
+	private StudentMapper mapper;
 	
 	@Override
-	public List<ProfessorVO> list() {
+	public List<StudentVO> list() {
 		return mapper.list();
 	}
 	
 	@Override
-	public void insert(ProfessorVO item) {
+	public void insert(StudentVO item) {
 		mapper.insert(item);
 	}
 
 	@Override
-	public ProfessorVO read(long pid) {
+	public StudentVO read(long pid) {
 		return mapper.read(pid);
 	}
 
@@ -35,7 +35,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 	}
 
 	@Override
-	public void update(ProfessorVO item) {
+	public void update(StudentVO item) {
 		mapper.update(item);		
 	}	
 	

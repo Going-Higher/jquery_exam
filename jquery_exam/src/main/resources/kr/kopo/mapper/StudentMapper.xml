@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kopo.mapper.StudentMapper">
+
+	<select id="list" resultType="kr.kopo.domain.StudentVO">
+		<![CDATA[
+			select * from student
+		]]>
+	</select>
+	
+	<insert id="insert">
+		<![CDATA[
+			insert into student (sid,sname,dept,birth,sex,pid)
+			values(#{sid},#{sname},#{dept},#{birth,jdbcType=DATE},#{sex},#{pid})
+		]]>
+	</insert>
+	
+	<select id="read" resultType="kr.kopo.domain.ProfessorVO">
+		<![CDATA[
+			select * from student where sid = #{sid}
+		]]>
+	</select>
+	
+	<delete id="delete">
+		delete student where sid = #{sid}
+	</delete>
+		
+	<update id="update">
+		update student
+		set sid= #{sid},
+			sname= #{sname},
+			dept = #{dept},
+			birth= #{birth},
+			sex = #{sex},
+			pid = #{pid}
+		where sid = #{sid}
+	</update>
+	
+</mapper>

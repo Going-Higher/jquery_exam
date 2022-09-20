@@ -12,7 +12,7 @@ import kr.kopo.mapper.StudentMapper;
 public class StudentServiceImpl implements StudentService {
 	
 	@Autowired
-	private StudentMapper mapper;
+	StudentMapper mapper;
 	
 	@Override
 	public List<StudentVO> list() {
@@ -20,18 +20,18 @@ public class StudentServiceImpl implements StudentService {
 	}
 	
 	@Override
-	public void insert(StudentVO item) {
+	public void register(StudentVO item) {
 		mapper.insert(item);
 	}
 
 	@Override
-	public StudentVO read(long pid) {
+	public List<StudentVO> read(long pid) {
 		return mapper.read(pid);
 	}
 
 	@Override
-	public void delete(long pid) {
-		mapper.delete(pid);		
+	public void delete(long sid) {
+		mapper.delete(sid);		
 	}
 
 	@Override

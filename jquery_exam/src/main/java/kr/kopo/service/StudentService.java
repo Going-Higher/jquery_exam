@@ -6,14 +6,14 @@ import kr.kopo.domain.StudentVO;
 
 public interface StudentService {
 	
-	List<StudentVO> list();
+	public List<StudentVO> list();
 	
-	StudentVO read(long pid);
+	public void register(StudentVO item);
 	
-	void insert(StudentVO item);
+	public List<StudentVO> read(long pid);
 	
-	void delete(long sid);
+	public void delete(long sid);
 	
-	void update(StudentVO item);
+	public void update(StudentVO item);
 	
 }

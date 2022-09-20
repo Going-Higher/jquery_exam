@@ -12,33 +12,57 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 $(function() {	
-	$.ajax({
-		url: "/controller/sample/getList1/444.json",
-		dataType: "JSON",
-		success: function(data) {
-			if(data.length > 0) {
-// 				var tb = $(".wrap").html();
-				var tb = $('<table class="table table-striped table-bordered table-hover"/>');
-				var head = $("<tr/>").append($("<td/>").text("학생번호"), $("<td/>").text("성명"), $("<td/>").text("학과"), $("<td/>").text("생일"), $("<td/>").text("성별"), $("<td/>").text("교수번호"));
-				console.log(tb);
-				tb.append(head);
-// 				$(".wrap").empty();
-				var html = "";
-				for(var i in data) {						
-					var $sid = data[i].sid;
-					var $sname = data[i].sname;
-					var $dept = data[i].dept;
-					var $birth = new Date(data[i].birth).toLocaleDateString();
-					var $sex = data[i].sex;
-					var $pid = data[i].pid;
-					var row = $("<tr/>").append($("<td/>").text($sid), $("<td/>").text($sname), $("<td/>").text($dept), $("<td/>").text($birth), $("<td/>").text($sex), $("<td/>").text($pid));
-					tb.append(row);
+	function getList(param) {
+		
+		var pid = param.pid;
+		
+		$.ajax({
+			url: "/controller/sample/getList1/" + pid + ".json",
+			dataType: "JSON",
+			success: function(data) {
+				if(data.length > 0) {
+	// 				var tb = $(".wrap").html();
+					var tb = $('<table class="table table-striped table-bordered table-hover"/>');
+					var head = $("<tr/>").append($("<td/>").text("학생번호"), $("<td/>").text("학생이름"), $("<td/>").text("학과"), $("<td/>").text("생년월일"), $("<td/>").text("성별"), $("<td/>").text("지도교수번호"));
+					console.log(tb);
+					tb.append(head);
+	// 				$(".wrap").empty();
+					var html = "";
+					for(var i in data) {	
+						html += "<tr>";
+						html += "<td>" + data[i].sid + "</td>";
+						html += "<td>" + data[i].sname + "</td>";
+						html += "<td>" + data[i].dept + "</td>";
+						var $birth = new Date(data[i].birth).toLocaleDateString();
+						html += "<td>" + $birth + "</td>";
+						html += "<td>" + data[i].sex + "</td>";
+						html += "<td>" + data[i].pid + "</td>";
+						html += "</tr>";
+						
+	// 					var $sid = data[i].sid;
+	// 					var $sname = data[i].sname;
+	// 					var $dept = data[i].dept;
+	// 					var $birth = new Date(data[i].birth).toLocaleDateString();
+	// 					var $sex = data[i].sex;
+	// 					var $pid = data[i].pid;
+	// 					var row = $("<tr/>").append($("<td/>").text($sid), $("<td/>").text($sname), $("<td/>").text($dept), $("<td/>").text($birth), $("<td/>").text($sex), $("<td/>").text($pid));
+	// 					tb.append(row);
+					}
+					tb.append(html);
+					console.log(tb);
+					$(".wrap").append(tb);
 				}
-// 				tb.append(html);
-				console.log(tb);
-				$(".wrap").append(tb);
 			}
-		}
+		});		
+	}
+		
+	$("tr").on("click", function(e) {
+// 		e.preventDefault();
+		$(".wrap").empty();
+		var pidno = $(this).index();
+		pidno = $(".move").eq(pidno).text();
+		console.log("pidno" + pidno);
+		getList({pid:pidno});
 	});
 });
 </script>
@@ -61,7 +85,7 @@ $(function() {
 	<tbody id=titlebody>
 		<c:forEach var="item" items="${list}">
 		<tr id=title>
-			<td id=title1>${item.pid}</td>
+			<td id=title1 class="move">${item.pid}</td>
 			<td>${item.pname}</td>
 			<td id=title2>${item.dept}</td>
 			<td>${item.post}</td>

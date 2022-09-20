@@ -10,7 +10,7 @@ public interface StudentMapper {
 	
 	public void insert(StudentVO item);
 	
-	public StudentVO read(long sid);
+	public List<StudentVO> read(long pid);
 	
 	public int update(StudentVO item);
 	

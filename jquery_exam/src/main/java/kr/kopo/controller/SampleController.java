@@ -79,7 +79,7 @@ public class SampleController {
 	 }
  
     @GetMapping(value = "/getList/{pid}")
-	public ResponseEntity<List<ProfessorVO>> getList1(@PathVariable("pid") long pid) throws ParseException{		
+	public ResponseEntity<List<ProfessorVO>> getList(@PathVariable("pid") long pid) throws ParseException{		
 		
     	/*
 		 * List<ProfessorVO> list=null; list=new ArrayList<ProfessorVO>(); ProfessorVO
@@ -108,8 +108,8 @@ public class SampleController {
 	}
  
     @GetMapping(value = "/getList1/{pid}")
-	public ResponseEntity<List<StudentVO>> getList(@PathVariable("pid") long pid) throws ParseException{		
+	public ResponseEntity<List<StudentVO>> getList1(@PathVariable("pid") long pid) throws ParseException{		
 		
-		return new ResponseEntity<>(service1.list(),HttpStatus.OK);
+		return new ResponseEntity<>(service1.read(pid),HttpStatus.OK);
 	}
 }

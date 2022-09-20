@@ -15,9 +15,9 @@
 		]]>
 	</insert>
 	
-	<select id="read" resultType="kr.kopo.domain.ProfessorVO">
+	<select id="read" resultType="kr.kopo.domain.StudentVO">
 		<![CDATA[
-			select * from student where sid = #{sid}
+			select * from student where pid = #{pid}
 		]]>
 	</select>
 	

@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.kopo.domain.CustomerVO;
 import kr.kopo.domain.ProfessorVO;
 import kr.kopo.domain.SampleVO;
 import kr.kopo.domain.StudentVO;
 import kr.kopo.domain.Ticket;
+import kr.kopo.service.CustomerService;
 import kr.kopo.service.ProfessorService;
 import kr.kopo.service.StudentService;
 
@@ -34,6 +36,8 @@ public class SampleController {
 	private ProfessorService service;
 	@Autowired
 	private StudentService service1;
+	@Autowired
+	private CustomerService CustomerService;
 	
 	@GetMapping(value="/getText",produces="text/plain; charset=UTF-8")
 	 public String getText() {
@@ -112,4 +116,11 @@ public class SampleController {
 		
 		return new ResponseEntity<>(service1.read(pid),HttpStatus.OK);
 	}
+    
+    @GetMapping(value = "/getList2/{sid}")
+	public ResponseEntity<CustomerVO> getList2(@PathVariable("cid") long cid) throws ParseException{		
+		
+		return new ResponseEntity<>(CustomerService.read(cid),HttpStatus.OK);
+	}
+    
 }

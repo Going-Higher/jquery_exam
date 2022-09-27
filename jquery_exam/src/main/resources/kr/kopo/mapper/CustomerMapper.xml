@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kopo.mapper.CustomerMapper">
+	 <select id="list" resultType="kr.kopo.domain.CustomerVO">
+		<![CDATA[
+			select * from customer
+		]]>
+	</select>
+	
+	<insert id="insert">
+		<![CDATA[
+			insert into customer (cid,id,cname,pwd,mileage,addr,post,tel)
+			values(#{cid},#{id},#{cname},#{pwd},#{mileage},#{addr},#{post},#{tel})
+		]]>
+	</insert>
+	<select id="read" resultType="kr.kopo.domain.CustomerVO">
+		<![CDATA[
+			select * from customer where cid = #{cid}
+		]]>
+	</select>
+		
+	<delete id="delete">
+		delete customer where cid = #{cid}
+	</delete>
+		
+	<update id="update">
+		update customer
+		set cid= #{cid},
+			id= #{id},
+			cname = #{cname},
+			pwd= #{pwd},
+			mileage = #{mileage},
+			addr = #{addr},
+			post = #{post},
+			tel = #{tel}
+		where cid = #{cid}
+	</update>
+		
+</mapper>

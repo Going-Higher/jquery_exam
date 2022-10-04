@@ -15,5 +15,7 @@ public interface ProfessorService {
 	void delete(long pid);
 	
 	void update(ProfessorVO item);
+
+	public void register(ProfessorVO item);
 	
 }

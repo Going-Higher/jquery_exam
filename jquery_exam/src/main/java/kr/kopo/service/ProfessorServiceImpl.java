@@ -37,6 +37,12 @@ public class ProfessorServiceImpl implements ProfessorService {
 	@Override
 	public void update(ProfessorVO item) {
 		mapper.update(item);		
+	}
+
+	@Override
+	public void register(ProfessorVO item) {
+		mapper.insert(item);
+		
 	}	
 	
 }

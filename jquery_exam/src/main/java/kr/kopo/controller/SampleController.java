@@ -1,9 +1,6 @@
 package kr.kopo.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,12 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.kopo.domain.CustomerVO;
 import kr.kopo.domain.ProfessorVO;
 import kr.kopo.domain.SampleVO;
 import kr.kopo.domain.StudentVO;
 import kr.kopo.domain.Ticket;
-import kr.kopo.service.CustomerService;
 import kr.kopo.service.ProfessorService;
 import kr.kopo.service.StudentService;
 
@@ -36,56 +31,61 @@ public class SampleController {
 	private ProfessorService service;
 	@Autowired
 	private StudentService service1;
-	@Autowired
-	private CustomerService CustomerService;
-	
 	@GetMapping(value="/getText",produces="text/plain; charset=UTF-8")
-	 public String getText() {
-		 return "안녕하세요";
-	 }
-	 @GetMapping(value="/getSample")
-	 public SampleVO getSample() {
-		 return new SampleVO(112,"star","burn");
-	 }
-	 @GetMapping(value = "/getList")
-	 public List<SampleVO> getList(){
-		 return IntStream.range(1, 10).mapToObj(i->new SampleVO(i,i+"First",i+"Last")).collect(Collectors.toList());
-	 }
-	 @GetMapping(value = "/getMap")
-	 public Map<String,SampleVO> getMap(){
-	 	Map<String,SampleVO> map = new HashMap<>();
-	 	map.put("First", new SampleVO(111,"그루트","쥬니어"));
-	 	return map;
-	 }
-	 @GetMapping(value = "/check",params= {"height","weight"})
-	 public ResponseEntity<SampleVO> check(Double height, Double weight){
-	 	SampleVO vo = new SampleVO(0,""+height,""+weight);
-	 	ResponseEntity<SampleVO> result = null;
-	 	if(height < 150) {
-	 		result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(vo);
-	 		
-	 	} else {
-				result = ResponseEntity.status(HttpStatus.OK).body(vo);
-			}
-	 	return result;
-	 }
-	 @GetMapping("/product/{cat}/{pid}")
-	 public String[] getPath(@PathVariable("cat") String cat, @PathVariable("pid") Integer pid)
-	 {
-	 	return new String[] { "category: " +cat,"productid: "+pid};
-	 			
-	 }
-	 @PostMapping("/ticket")
-	 public ResponseEntity<Ticket> convert(@RequestBody Ticket ticket) {
-	 	 	ResponseEntity<Ticket> result = null;
-	 	return new ResponseEntity<>(ticket,HttpStatus.OK);
-	 	//return result= ResponseEntity.status(HttpStatus.OK).body(ticket);
-	 }
+ public String getText() {
+	 return "안녕하세요";
+ }
+ @GetMapping(value="/getSample")
+ public SampleVO getSample() {
+	 return new SampleVO(112,"star","burn");
+ }
+ @GetMapping(value = "/getList")
+ public List<SampleVO> getList(){
+ return IntStream.range(1, 10).mapToObj(i->new SampleVO(i,i+"First",i+"Last")).collect(Collectors.toList());
+ }
+ @GetMapping(value = "/getMap")
+ public Map<String,SampleVO> getMap(){
+ 	Map<String,SampleVO> map = new HashMap<>();
+ 	map.put("First", new SampleVO(111,"그루트","쥬니어"));
+ 	return map;
+ }
+ @GetMapping(value = "/check",params= {"height","weight"})
+ public ResponseEntity<SampleVO> check(Double height, Double weight){
+ 	SampleVO vo = new SampleVO(0,""+height,""+weight);
+ 	ResponseEntity<SampleVO> result = null;
+ 	if(height < 150) {
+ 		result = ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(vo);
+ 		
+ 	} else {
+			result = ResponseEntity.status(HttpStatus.OK).body(vo);
+		}
+ 	return result;
+ }
+ @GetMapping("/product/{cat}/{pid}")
+ public String[] getPath(@PathVariable("cat") String cat,
+		 @PathVariable("pid") Integer pid)
+ {
+ 	return new String[] { "category: " +cat,"productid: "+pid};
+ 			
+ }
+ @PostMapping("/ticket")
+ public ResponseEntity<Ticket> convert(@RequestBody Ticket ticket) {
+ 	 	ResponseEntity<Ticket> result = null;
+ 	return new ResponseEntity<>(ticket,HttpStatus.OK);
+ 	//return result= ResponseEntity.status(HttpStatus.OK).body(ticket);
+ }
  
+	
+    @GetMapping(value = "/getList1/{pid}")
+	public ResponseEntity<List<StudentVO>> getList1(@PathVariable("pid") long pid){
+		   
+    	return new ResponseEntity<>(service1.read(pid),HttpStatus.OK);
+	}
+
     @GetMapping(value = "/getList/{pid}")
-	public ResponseEntity<List<ProfessorVO>> getList(@PathVariable("pid") long pid) throws ParseException{		
+	public ResponseEntity<List<ProfessorVO>> getList(@PathVariable("pid") long pid) throws ParseException{
 		
-    	/*
+		/*
 		 * List<ProfessorVO> list=null; list=new ArrayList<ProfessorVO>(); ProfessorVO
 		 * vo = new ProfessorVO(); String from ="1985-05-29"; Date to; SimpleDateFormat
 		 * transForm = new SimpleDateFormat("yyyy-MM-dd"); to=transForm.parse(from);
@@ -111,16 +111,4 @@ public class SampleController {
 		return new ResponseEntity<>(service.list(),HttpStatus.OK);
 	}
  
-    @GetMapping(value = "/getList1/{pid}")
-	public ResponseEntity<List<StudentVO>> getList1(@PathVariable("pid") long pid) throws ParseException{		
-		
-		return new ResponseEntity<>(service1.read(pid),HttpStatus.OK);
-	}
-    
-    @GetMapping(value = "/getList2/{sid}")
-	public ResponseEntity<CustomerVO> getList2(@PathVariable("cid") long cid) throws ParseException{		
-		
-		return new ResponseEntity<>(CustomerService.read(cid),HttpStatus.OK);
-	}
-    
 }
